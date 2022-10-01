@@ -1,0 +1,17 @@
+type Query {
+    customerById(customerId: ID!): Customer,
+    customers: [Customer]
+}
+
+type Mutation {
+    addCustomer(customerInput: CustomerInput!): Customer
+}
+
+input CustomerInput {
+    name: String!
+}
+
+type Customer {
+    customerId: ID!,
+    name: String!
+}
