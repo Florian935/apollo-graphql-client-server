@@ -1,6 +1,6 @@
 type Query {
     customerById(customerId: ID!): Customer,
-    customers: [Customer]
+    allCustomers: [Customer]
 }
 
 type Mutation {

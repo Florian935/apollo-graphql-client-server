@@ -5,10 +5,12 @@ import com.florian935.graphql.server.domain.CustomerInput;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
@@ -26,7 +28,7 @@ public class CustomerGraphqlController {
             );
 
     @QueryMapping
-    Flux<Customer> customers() {
+    Flux<Customer> allCustomers() {
         final var customersAsList = customers.values();
 
         return Flux.fromIterable(customersAsList);

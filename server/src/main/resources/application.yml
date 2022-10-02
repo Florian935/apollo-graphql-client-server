@@ -2,3 +2,11 @@ spring:
   graphql:
     graphiql:
       enabled: true
+    rsocket:
+      mapping: graphql
+  rsocket:
+    server:
+      port: 7000
+      transport: websocket
+  profiles:
+    active: local
