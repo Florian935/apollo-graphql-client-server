@@ -7,6 +7,10 @@ type Mutation {
     addCustomer(customerInput: CustomerInput!): Customer
 }
 
+type Subscription {
+    streamCustomer: Customer
+}
+
 input CustomerInput {
     name: String!
 }

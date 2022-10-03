@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { gql, Query } from 'apollo-angular';
+import { gql, Subscription } from 'apollo-angular';
 
 @Injectable({
     providedIn: 'root',
 })
-export class CustomerById extends Query<any> {
+export class StreamCustomerGQL extends Subscription<any> {
     override document = gql`
-        query customerById($customerId: ID!) {
-            customerById(customerId: $customerId) {
+        subscription streamCustomer {
+            streamCustomer {
                 customerId
                 name
             }

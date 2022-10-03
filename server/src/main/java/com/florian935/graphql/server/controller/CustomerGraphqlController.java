@@ -5,6 +5,7 @@ import com.florian935.graphql.server.domain.CustomerInput;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Flux;
@@ -47,5 +48,13 @@ public class CustomerGraphqlController {
         this.customers.put(uuid, new Customer(uuid, customerInput.name()));
 
         return Mono.just(new Customer(uuid, customerInput.name()));
+    }
+
+    @SubscriptionMapping
+    Flux<Customer> streamCustomer() {
+        return Flux.interval(Duration.ofSeconds(1))
+                .map(interval -> UUID.randomUUID().toString())
+                .map(uuid -> new Customer(uuid, String.format("Customer %s", uuid)))
+                .take(5);
     }
 }

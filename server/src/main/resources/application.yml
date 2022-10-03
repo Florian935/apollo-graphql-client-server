@@ -1,5 +1,7 @@
 spring:
   graphql:
+    websocket:
+      path: /graphql
     graphiql:
       enabled: true
     rsocket:
