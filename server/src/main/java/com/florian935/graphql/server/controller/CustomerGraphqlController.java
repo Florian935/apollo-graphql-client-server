@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
@@ -57,4 +58,11 @@ public class CustomerGraphqlController {
                 .map(uuid -> new Customer(uuid, String.format("Customer %s", uuid)))
                 .take(5);
     }
+
+    @SubscriptionMapping
+    Flux<Customer> addCustomers(@Argument List<CustomerInput> customersInput) {
+        return Flux.fromIterable(customersInput).map(customerInput ->
+            new Customer(UUID.randomUUID().toString(), customerInput.name()));
+    }
+
 }

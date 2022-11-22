@@ -4,7 +4,7 @@ import { WellKnownMimeType } from 'rsocket-composite-metadata';
 import { RSocket, RSocketConnector } from 'rsocket-core';
 import { RSocketRequester } from 'rsocket-messaging';
 import { WebsocketClientTransport } from 'rsocket-websocket-client';
-import { from, map, mergeMap, Observable, of } from 'rxjs';
+import { from, map, mergeMap, Observable } from 'rxjs';
 import { Customer } from './customer';
 import { ModelCodec } from './model-codec';
 import { StringCodec } from './string-codec';

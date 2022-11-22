@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
                     name
                 }
             }`,
-            variables: { customerId: '4b18f8c6-32ba-4c66-a86e-4f6349496e23' },
+            variables: { customerId: '19a3ffe5-2eed-4ca8-93d3-6ad5e11cee9a' },
             operationName: 'customerById',
         });
 
@@ -61,6 +61,7 @@ export class AppComponent implements OnInit {
         const subscription = JSON.stringify({
             query: `subscription streamCustomer {
                     streamCustomer {
+                        customerId
                         name
                     }
                 }
@@ -71,6 +72,30 @@ export class AppComponent implements OnInit {
 
         this._rsocketService
             .requestStream(subscription, 'graphql')
+            .subscribe(console.log);
+
+        const subscriptionWithArgument = JSON.stringify({
+            query: `subscription addCustomers($customersInput: [CustomerInput]!) {
+                        addCustomers(customersInput: $customersInput) {
+                            customerId
+                            name
+                        }
+                    }
+                    `,
+            variables: {
+                customersInput: [
+                    { name: 'Customer 1' },
+                    { name: 'Customer 2' },
+                    { name: 'Customer 3' },
+                    { name: 'Customer 4' },
+                    { name: 'Customer 5' },
+                ],
+            },
+            operationName: 'addCustomers',
+        });
+
+        this._rsocketService
+            .requestStream(subscriptionWithArgument, 'graphql')
             .subscribe(console.log);
     }
 }
